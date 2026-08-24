@@ -7,7 +7,7 @@
 {% block public_body %}
 <div class="lp-container lp-narrow legal-page">
   <h1>プライバシーポリシー</h1>
-  <p class="legal-updated">最終更新日：2026年7月31日</p>
+  <p class="legal-updated">最終更新日：2026年8月25日</p>
 
   <section>
     <h2>1. 適用範囲</h2>
@@ -41,8 +41,36 @@
     <p>取得した情報はGoogle Cloud Firestore（Googleのクラウドデータベース）に保存します。Google認証のアクセストークンは、平文のまま保存せず、暗号化した状態で保存しています。</p>
   </section>
 
+  <section id="security">
+    <h2>5. データの保護措置</h2>
+    <p>フォームの回答には、回答した第三者の氏名や連絡先といった機微な情報が含まれることがあります。{{ APP_NAME }}では、これらを保護するために次の措置をとっています。</p>
+    <ul>
+      <li><strong>通信の暗号化</strong>：ブラウザとサーバー間の通信、およびサーバーとGoogle APIの間の通信は、すべてTLS（HTTPS）で暗号化しています。暗号化されていない接続でアクセスされた場合は、暗号化された接続へ転送します。</li>
+      <li><strong>保存時の暗号化</strong>：データの保存先であるGoogle Cloud Firestoreは、保存されたデータをGoogleが管理する鍵で暗号化します。加えてGoogle認証のアクセストークンは、Firestoreへ書き込む前にアプリ側でも暗号化しており、平文では保存していません。</li>
+      <li><strong>利用者ごとの分離</strong>：管理フォーム・回答・メモ・対応状況は、Googleアカウントごとに分けて保存しています。ある利用者のデータを、別の利用者が閲覧・取得することはできません。</li>
+      <li><strong>アクセスできる人の限定</strong>：本番環境のデータベースとサーバーへアクセスできるのは、運営者本人のみです。サーバーへの接続には公開鍵認証を使用しています。</li>
+      <li><strong>セッションの保護</strong>：ログイン状態を保持するCookieには、HTTPS経由でのみ送信する設定と、JavaScriptから読み取れない設定を適用しています。あわせてフォーム送信にはCSRF対策を行っています。</li>
+      <li><strong>要求する権限の最小化</strong>：Googleに要求する権限は読み取り専用のものだけで、Googleドライブ全体を参照する権限は要求しません。フォームは利用者が編集画面のURLを登録したものだけを対象とします。</li>
+      <li><strong>保持するデータの最小化</strong>：利用目的に必要な範囲を超えてデータを保持しません。利用者がアカウントを削除すると、保存済みの管理フォーム・回答・メモ・設定をすべて削除します。</li>
+      <li><strong>不正アクセスへの備え</strong>：サーバーログを記録し、不審なアクセスや障害の調査に用います。データの取り扱いに関わる不具合を確認した場合は、対象となる利用者へお問い合わせ先を通じて連絡します。</li>
+    </ul>
+  </section>
+
+  <section id="limited-use">
+    <h2>6. Google APIから取得した情報の取り扱い（Limited Use）</h2>
+    <p>{{ APP_NAME }}がGoogle APIから受け取った情報の使用および他アプリへの移転は、<a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>（Limited Useの要件を含む）に準拠します。</p>
+    <p class="small-note">{{ APP_NAME }}&rsquo;s use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener noreferrer">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+    <p>具体的には、次のことを行いません。</p>
+    <ul>
+      <li>取得した情報を、広告の配信や広告のターゲティングに利用すること</li>
+      <li>取得した情報を、データ仲介事業者・情報販売事業者その他の第三者へ販売または提供すること</li>
+      <li><strong>取得した情報を、汎用的なAI・機械学習モデルの開発・改善・学習に利用すること。</strong>フォームの質問内容および回答を、人工知能モデルの学習データとして使用したり、そのために第三者へ提供したりすることはありません。</li>
+      <li>人間が取得した情報を閲覧すること。ただし、利用者から明示的な同意を得た場合、セキュリティ上の調査や法令遵守のために必要な場合、および情報を集計して個人を識別できない形にした場合を除きます。</li>
+    </ul>
+  </section>
+
   <section>
-    <h2>5. 利用目的</h2>
+    <h2>7. 利用目的</h2>
     <ul>
       <li>複数のGoogleフォームへの問い合わせを一覧化し、確認・対応状況の管理を行うため</li>
       <li>不具合の調査、お問い合わせへの対応のため</li>
@@ -52,23 +80,23 @@
   </section>
 
   <section>
-    <h2>6. 情報の保持期間・削除</h2>
+    <h2>8. 情報の保持期間・削除</h2>
     <p>取得した情報は、アカウントが存在する間保持します。設定画面の「アカウントを削除」を実行すると、本アプリに保存した管理フォーム・回答・設定を含むすべてのデータを削除します。この操作は取り消せません。</p>
     <p>Googleアカウント側との連携自体は、<a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener noreferrer">Googleアカウントの「サードパーティ製アプリとサービス」の管理画面</a>からもいつでも解除できます。</p>
   </section>
 
   <section>
-    <h2>7. 第三者提供</h2>
+    <h2>9. 第三者提供</h2>
     <p>法令に基づく場合を除き、取得した情報を本人の同意なく第三者へ提供することはありません。</p>
   </section>
 
   <section>
-    <h2>8. 本ポリシーの変更</h2>
+    <h2>10. 本ポリシーの変更</h2>
     <p>本サービスの内容や法令の変更に応じて、本ポリシーを改定することがあります。重要な変更がある場合は、本ページの更新日を変更してお知らせします。</p>
   </section>
 
   <section>
-    <h2>9. お問い合わせ</h2>
+    <h2>11. お問い合わせ</h2>
     <p>情報の取り扱いに関するご質問・開示・削除のご依頼は、<a href="{{ CONTACT_FORM_URL }}" target="_blank" rel="noopener noreferrer">お問い合わせフォーム</a>からご連絡ください。</p>
   </section>
 </div>
